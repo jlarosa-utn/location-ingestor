@@ -26,6 +26,18 @@ export class GeoLocationDetails extends React.Component<ValueProps, any> {
 
     setDetails(data: GeoLocationData) {
         console.log(data);
+        fetch(`/location`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)}
+            ).then(response => {
+                console.log(response)
+            })
+            .catch(error =>{
+                console.log(error)
+            });
         this.setState({...this.state, details : data});
     }
 
@@ -33,8 +45,8 @@ export class GeoLocationDetails extends React.Component<ValueProps, any> {
         fetch(
             "https://geolocation-db.com/json/09068b10-55fe-11eb-8939-299a0c3ab5e5"
         )
-            .then(response => response.json())
-            .then(data => this.setDetails(data));
+        .then(response => response.json())
+        .then(data => this.setDetails(data));
     };
 
     render() {
